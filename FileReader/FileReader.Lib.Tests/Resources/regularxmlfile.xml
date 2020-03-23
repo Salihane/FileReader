@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customers>
+	<customer>
+		<name>Customer 1</name>
+		<Address>
+			<Street>Hello street</Street>
+			<HouseNr>87</HouseNr>
+			<Box>4b</Box>
+			<ZipCode>1000</ZipCode>
+			<City>Brussels</City>
+		</Address>
+	</customer>
+	<customer>
+		<name>Customer 2</name>
+		<Address>
+			<Street>Morning street</Street>
+			<HouseNr>5</HouseNr>
+			<Box>10</Box>
+			<ZipCode>9900</ZipCode>
+			<City>Gent</City>
+		</Address>
+	</customer>
+</customers>
