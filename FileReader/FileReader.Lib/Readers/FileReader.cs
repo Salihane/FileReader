@@ -6,7 +6,7 @@ namespace FileReader.Lib.Readers
 	public abstract class FileReader
 	{
 		protected IFileValidator FileValidator { get; set; }
-		protected string FilePath { get; set; }
+		public string FilePath { get; protected set; }
 		public abstract Task<string> ReadAsync();
 	}
 }
