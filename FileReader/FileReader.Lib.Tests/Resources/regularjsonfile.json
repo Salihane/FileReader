@@ -1,0 +1,24 @@
+{
+	"customers": [
+		{
+			"name": "Customer 1",
+			"address": {
+				"street": "Hello street",
+				"houseNr": "87",
+				"box": "4b",
+				"zipCode": "1000",
+				"city": "Brussels"
+			}
+		},
+		{
+			"name": "Customer 2",
+			"address": {
+				"street": "Morning street",
+				"houseNr": "5",
+				"box": "10",
+				"zipCode": "9900",
+				"city": "Gent"
+			}
+		}
+	]
+}
