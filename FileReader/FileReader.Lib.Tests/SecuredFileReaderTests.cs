@@ -27,6 +27,7 @@ namespace FileReader.Lib.Tests
 			// Assert
 			Assert.Equal(expectedFileContent, fileContent);
 		}
+
 		[Fact]
 		public async Task Read_SecuredXmlFileAsReceptionist_ShouldReturnUnauthorizedMsg()
 		{
@@ -34,6 +35,40 @@ namespace FileReader.Lib.Tests
 			var dir = TestHelper.GetFilesDirectory();
 			var path = Path.Combine(dir, "regularxmlfile.xml");
 			var xmlFileReader = new XmlFileReader(path, new FileValidator());
+			var sut = new SecuredFileReader(xmlFileReader, new ReadAuthorization(UserRole.Receptionist));
+			const string expectedContent = "Unauthorized request.";
+
+			// Act
+			var fileContent = await sut.ReadAsync();
+
+			// Assert
+			Assert.Equal(expectedContent, fileContent);
+		}
+
+		[Fact]
+		public async Task Read_SecuredTextFileAsAdmin_ShouldReturnFileContent()
+		{
+			// Arrange
+			var dir = TestHelper.GetFilesDirectory();
+			var path = Path.Combine(dir, "regulartextfile.txt");
+			var xmlFileReader = new TextFileReader(path, new FileValidator());
+			var sut = new SecuredFileReader(xmlFileReader, new ReadAuthorization(UserRole.Admin));
+			const string expectedFileContent = "Hello there!\r\nThis is a regular text file.\r\n\r\n\r\n";
+
+			// Act
+			var fileContent = await sut.ReadAsync();
+
+			// Assert
+			Assert.Equal(expectedFileContent, fileContent);
+		}
+
+		[Fact]
+		public async Task Read_SecuredTextFileAsReceptionist_ShouldReturnUnauthorizedMsg()
+		{
+			// Arrange
+			var dir = TestHelper.GetFilesDirectory();
+			var path = Path.Combine(dir, "regulartextfile.txt");
+			var xmlFileReader = new TextFileReader(path, new FileValidator());
 			var sut = new SecuredFileReader(xmlFileReader, new ReadAuthorization(UserRole.Receptionist));
 			const string expectedContent = "Unauthorized request.";
 
