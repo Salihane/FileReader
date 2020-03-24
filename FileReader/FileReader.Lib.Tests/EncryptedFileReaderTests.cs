@@ -43,5 +43,23 @@ namespace FileReader.Lib.Tests
 			// Assert
 			Assert.Equal(expectedFileContent, fileContent);
 		}
+
+		[Fact]
+		public async Task Read_EncryptedJsonFile_ShouldReturnDecryptedFileContent()
+		{
+			// Arrange
+			var dir = TestHelper.GetFilesDirectory();
+			var path = Path.Combine(dir, "encryptedjsonfile.json");
+			var jsonFileReader = new JsonFileReader(path, new FileValidator());
+			var sut = new EncryptedFileReader(jsonFileReader, new Base64Encryption());
+			const string expectedFileContent =
+				"{\r\n\t\"customers\": [\r\n\t\t{\r\n\t\t\t\"name\": \"Customer 1\",\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"street\": \"Hello street\",\r\n\t\t\t\t\"houseNr\": \"87\",\r\n\t\t\t\t\"box\": \"4b\",\r\n\t\t\t\t\"zipCode\": \"1000\",\r\n\t\t\t\t\"city\": \"Brussels\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"name\": \"Customer 2\",\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"street\": \"Morning street\",\r\n\t\t\t\t\"houseNr\": \"5\",\r\n\t\t\t\t\"box\": \"10\",\r\n\t\t\t\t\"zipCode\": \"9900\",\r\n\t\t\t\t\"city\": \"Gent\"\r\n\t\t\t}\r\n\t\t}\r\n\t]\r\n}";
+
+			// Act
+			var fileContent = await sut.ReadAsync();
+
+			// Assert
+			Assert.Equal(expectedFileContent, fileContent);
+		}
 	}
 }

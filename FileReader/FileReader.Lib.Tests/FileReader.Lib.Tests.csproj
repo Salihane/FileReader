@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\encryptedjsonfile.json" />
     <None Remove="Resources\encryptedtextfile.txt" />
     <None Remove="Resources\encryptedxmlfile.xml" />
     <None Remove="Resources\javascriptfile.js" />
@@ -16,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\encryptedjsonfile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\javascriptfile.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
