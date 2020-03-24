@@ -51,8 +51,8 @@ namespace FileReader.Lib.Tests
 			// Arrange
 			var dir = TestHelper.GetFilesDirectory();
 			var path = Path.Combine(dir, "regulartextfile.txt");
-			var xmlFileReader = new TextFileReader(path, new FileValidator());
-			var sut = new SecuredFileReader(xmlFileReader, new ReadAuthorization(UserRole.Admin));
+			var textFileReader = new TextFileReader(path, new FileValidator());
+			var sut = new SecuredFileReader(textFileReader, new ReadAuthorization(UserRole.Admin));
 			const string expectedFileContent = "Hello there!\r\nThis is a regular text file.\r\n\r\n\r\n";
 
 			// Act
@@ -68,8 +68,8 @@ namespace FileReader.Lib.Tests
 			// Arrange
 			var dir = TestHelper.GetFilesDirectory();
 			var path = Path.Combine(dir, "regulartextfile.txt");
-			var xmlFileReader = new TextFileReader(path, new FileValidator());
-			var sut = new SecuredFileReader(xmlFileReader, new ReadAuthorization(UserRole.Receptionist));
+			var textFileReader = new TextFileReader(path, new FileValidator());
+			var sut = new SecuredFileReader(textFileReader, new ReadAuthorization(UserRole.Receptionist));
 			const string expectedContent = "Unauthorized request.";
 
 			// Act
