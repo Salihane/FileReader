@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FileReader.Lib.Enums
+﻿namespace FileReader.Lib.Enums
 {
-    public enum FileType
-    {
-        Text,
-        Xml
-    }
+	public enum FileType
+	{
+		Text,
+		Xml,
+		Json
+	}
 }
