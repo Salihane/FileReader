@@ -3,7 +3,6 @@ using FileReader.Lib.Interfaces;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace FileReader.Lib.Readers
 {
@@ -30,9 +29,11 @@ namespace FileReader.Lib.Readers
 
 			if (Strict)
 			{
-				var xmlDoc = new XmlDocument();
-				await Task.Run(() => xmlDoc.Load(FilePath));
-				return xmlDoc.InnerXml;
+				// todo: the code below is disabled temporary, it causes multi-threading issues in the WPF client.
+				// todo: temp solution is to use the File.ReadAllTextAsync() outside the Strict block.
+				//var xmlDoc = new XmlDocument();
+				//await Task.Run(() => xmlDoc.Load(FilePath));
+				//return xmlDoc.InnerXml;
 			}
 
 			// Read XML file with invalid content (e.g. encrypted content)

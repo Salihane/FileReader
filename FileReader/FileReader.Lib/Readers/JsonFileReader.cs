@@ -25,8 +25,12 @@ namespace FileReader.Lib.Readers
 				throw new Exception(validationMsg);
 			}
 
-			using var reader = new StreamReader(FilePath);
-			return await reader.ReadToEndAsync();
+			// todo: the code below is disabled temporary, it causes multi-threading issues in the WPF client.
+			// todo: temp solution is to use the File.ReadAllTextAsync().
+			//using var reader = new StreamReader(FilePath);
+			//return await reader.ReadToEndAsync();
+
+			return await File.ReadAllTextAsync(FilePath);
 		}
 	}
 }

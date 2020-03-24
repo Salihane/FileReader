@@ -10,6 +10,7 @@ namespace FileReader.Lib.Readers
 	{
 		private readonly IFileValidator _fileValidator;
 		private readonly string _filePath;
+		private FileType _fileType;
 		private FileReader _fileReader;
 
 		public FileReaderBuilder(string filePath,
@@ -37,6 +38,12 @@ namespace FileReader.Lib.Readers
 				InitFileReader(FileType.Text);
 			}
 
+			if (_fileType == FileType.Xml)
+			{
+				var reader = (XmlFileReader)_fileReader;
+				reader.Strict = false;
+			}
+
 			_fileReader = new EncryptedFileReader(_fileReader, encryptionStrategy);
 			return this;
 		}
@@ -59,6 +66,7 @@ namespace FileReader.Lib.Readers
 
 		private void InitFileReader(FileType fileType)
 		{
+			_fileType = fileType;
 			_fileReader = fileType switch
 			{
 				FileType.Text => new TextFileReader(_filePath, _fileValidator),
