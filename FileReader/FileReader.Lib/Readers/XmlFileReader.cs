@@ -1,6 +1,7 @@
 ﻿using FileReader.Lib.Enums;
 using FileReader.Lib.Interfaces;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -8,6 +9,8 @@ namespace FileReader.Lib.Readers
 {
 	public class XmlFileReader : FileReader
 	{
+		public bool Strict { get; set; } = true;
+
 		public XmlFileReader(string filePath,
 							 IFileValidator fileValidator)
 		{
@@ -25,9 +28,15 @@ namespace FileReader.Lib.Readers
 				throw new Exception(validationMsg);
 			}
 
-			var xmlDoc = new XmlDocument();
-			await Task.Run(() => xmlDoc.Load(FilePath));
-			return xmlDoc.InnerXml;
+			if (Strict)
+			{
+				var xmlDoc = new XmlDocument();
+				await Task.Run(() => xmlDoc.Load(FilePath));
+				return xmlDoc.InnerXml;
+			}
+
+			// Read XML file with invalid content (e.g. encrypted content)
+			return await File.ReadAllTextAsync(FilePath);
 		}
 	}
 }
